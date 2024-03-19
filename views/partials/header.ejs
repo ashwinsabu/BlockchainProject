@@ -6,9 +6,9 @@
       <div class="collapse navbar-collapse" id="navcol-2">
           <ul class="navbar-nav ms-auto">
               <li class="nav-item"><a class="nav-link active" href="/">Home</a></li>
-              <li class="nav-item"><a class="nav-link" href="about">About Us</a></li>
-              <li class="nav-item"><a class="nav-link" href="contact">Contact Us</a></li>
-              <li class="nav-item"><a class="nav-link" href="destinations">Destinations</a></li>
+              <li class="nav-item"><a class="nav-link" href="/about">About Us</a></li>
+              <li class="nav-item"><a class="nav-link" href="/contact">Contact Us</a></li>
+              <li class="nav-item"><a class="nav-link" href="/destinations">Destinations</a></li>
           </ul><a class="btn btn-primary ms-md-2" id="userArea" role="button" onclick="connectMetamask()" >Login</a>
       </div>
   </div>
@@ -26,8 +26,9 @@
       if(window.ethereum !== "underfined"){
           const accounts = await ethereum.request({method: "eth_requestAccounts"});
           account = accounts[0];
-          var account1 = account.substring(0, 4);
+          var account1 = account.substring(account.length - 4);
           localStorage.setItem('account', account1);
+          localStorage.setItem('account_full', account);
           document.getElementById("userArea").innerHTML = `Account: ${account1}...`;
       }
   }
