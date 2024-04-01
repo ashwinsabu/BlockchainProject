@@ -48,7 +48,9 @@
                             <div class="card-body">
                               <h5 class="card-title">Package 2</h5>
                               <p class="card-text">20 day tour</p>
-                              <a href="#" class="btn btn-primary">Proceed to payment</a>
+                                <div>
+                                    <button class="btn btn-primary" onclick="depositContract()">Proceed to payment</button>
+                                </div>
                             </div>
                           </div>
                         </div>
@@ -58,6 +60,101 @@
         </div>
     </div>
     <script src="/assets/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/web3/1.2.7-rc.0/web3.min.js"></script>
+    <script>
+      // Initialize Web3
+      if (typeof web3 !== 'undefined') {
+        web3 = new Web3(web3.currentProvider);
+      } else {
+        web3 = new Web3(new Web3.providers.HttpProvider('HTTP://127.0.0.1:7545'));
+      }
+
+      var ABI = [
+	{
+		"inputs": [],
+		"stateMutability": "nonpayable",
+		"type": "constructor"
+	},
+	{
+		"inputs": [],
+		"name": "deposit",
+		"outputs": [],
+		"stateMutability": "payable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_amount",
+				"type": "uint256"
+			}
+		],
+		"name": "process",
+		"outputs": [],
+		"stateMutability": "payable",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "recipient",
+		"outputs": [
+			{
+				"internalType": "address payable",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "tokenAddress1",
+		"outputs": [
+			{
+				"internalType": "contract myToken",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_amount",
+				"type": "uint256"
+			}
+		],
+		"name": "transferAmount",
+		"outputs": [],
+		"stateMutability": "payable",
+		"type": "function"
+	}
+];
+      var Address = '0xb15a45e228648dfb3e149c5c18701ccfc1e11d5f'; // Add Your Contract address here!!!
+      window.web3 = new Web3(window.ethereum);
+      window.contract = new window.web3.eth.Contract(ABI, Address);
+      
+      async function depositContract() {
+        console.log("Hii")
+        var amount = '100000000000000000';
+
+        // account_full contains the metamask id of the user
+        var sender = localStorage.getItem('account_full');
+
+        // send the data to the smart contract
+        // await window.contract.methods.deposit().send({from: sender, value: amount});
+        // await window.contract.methods.transferAmount(amount).send({from: sender});
+        await window.contract.methods.process(amount).send({ from: sender, value: amount });
+
+
+        window.location.href = "/about";
+      }
+    </script>
 </body>
 
 </html>

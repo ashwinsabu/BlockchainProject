@@ -110,7 +110,7 @@
         web3 = new Web3(new Web3.providers.HttpProvider('HTTP://127.0.0.1:7545'));
       }
       // Set Contract Abi
-      var contractAbi = [
+      var ABI = [
 	{
 		"constant": false,
 		"inputs": [
@@ -277,10 +277,10 @@
 ] // Add Your Contract ABI here!!!
 
       // Set Contract Address
-      var contractAddress = '0xa77b2457d938d0ee83940ff657a013b7f3f691a3'; // Add Your Contract address here!!!
+      var Address = '0xa77b2457d938d0ee83940ff657a013b7f3f691a3'; // Add Your Contract address here!!!
 
         // Set the Contract
-        var contract = new web3.eth.Contract(contractAbi, contractAddress);
+        var contract = new web3.eth.Contract(ABI, Address);
 
         // Add an event listener to the form submission
         document.getElementById("submitForm").addEventListener("submit", async function(event) {
