@@ -20,6 +20,7 @@
                     <div class="col-md-8 col-xl-6 text-center mx-auto">
                         <h2>DESTINATIONS</h2>
                         <p class="w-lg-50">Choose the best place you desire. We are there to set the plan according to your availability</p>
+                        <div id="displayTable"></div>
                     </div>
                 </div>
                 <div class="row gy-4 row-cols-1 row-cols-md-2 row-cols-xl-3">
@@ -27,7 +28,8 @@
                         <div><img class="rounded img-fluid d-block w-100 fit-cover" alt="aerial photography of flowing waterfall" style="height: 200px;" src="assets/img/photo-1575305327780-a887f284432f.jpg">
                             <div class="py-4">
                                 <h4>Kerala</h4>
-                                <p>A perfect table for group of 3 to 4</p><button class="btn btn-primary" type="button">Select</button>
+                                <p>Kerala is one of the prominent tourist destinations of India, with coconut-lined sandy beaches, backwaters, hill stations, Ayurvedic tourism.</p>
+                                <a class="btn btn-primary" type="button" href="/details/1">Proceed</a>
                             </div>
                         </div>
                     </div>
@@ -35,7 +37,8 @@
                         <div><img class="rounded img-fluid d-block w-100 fit-cover" alt="brown concrete arch under blue sky during daytime" style="height: 200px;" src="assets/img/photo-1587474260584-136574528ed5.jpg">
                             <div class="py-4">
                                 <h4>Delhi</h4>
-                                <p>A perfect table for group of 3 to 4</p><button class="btn btn-primary" type="button">Select</button>
+                                <p>Delhi is a beautiful city and it is the capital of India. It is an old city because it has many buildings that were built during the ancient time.</p>
+                                <a class="btn btn-primary" type="button" href="/details/2">Proceed</a>
                             </div>
                         </div>
                     </div>
@@ -43,7 +46,8 @@
                         <div><img class="rounded img-fluid d-block w-100 fit-cover" alt="green plants under cloudy sky during daytime" style="height: 200px;" src="assets/img/photo-1586168845106-e00791152425.jpg">
                             <div class="py-4">
                                 <h4>Karnataka</h4>
-                                <p>A perfect table for group of 3 to 4</p><button class="btn btn-primary" type="button">Select</button>
+                                <p>Karnataka is a state in India, located on the country's western coast. Its capital is Bengaluru. Its name is a Kannada word meaning “lofty land.”</p>
+                                <a class="btn btn-primary" type="button" href="/details/3">Proceed</a>
                             </div>
                         </div>
                     </div>
@@ -51,7 +55,8 @@
                         <div><img class="rounded img-fluid d-block w-100 fit-cover" alt="green and brown wooden house on lake near snow covered mountain during daytime" style="height: 200px;" src="assets/img/photo-1595815771614-ade9d652a65d.jpg">
                             <div class="py-4">
                                 <h4>Jammu and Kashmir</h4>
-                                <p>A perfect table for group of 3 to 4</p><button class="btn btn-primary" type="button">Select</button>
+                                <p>Jammu and Kashmir is the northernmost state of the Union of India. The state shares international border with China and Afghanistan in the north, Tibet in the east and Pakistan in the west. The states of Punjab and Himachal Pradesh form its southern border.</p>
+                                <a class="btn btn-primary" type="button" href="/details/4">Proceed</a>
                             </div>
                         </div>
                     </div>
@@ -80,7 +85,237 @@
             <p class="text-muted mb-0">Copyright © 2024 Brand</p>
         </div>
     </footer>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/web3/1.2.7-rc.0/web3.min.js"></script>
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <script>
+
+        // Initialize Web3
+      if (typeof web3 !== 'undefined') {
+        web3 = new Web3(web3.currentProvider);
+      } else {
+        web3 = new Web3(new Web3.providers.HttpProvider('HTTP://127.0.0.1:7545'));
+      }
+      // Set Contract Abi
+      var ABI =[
+	{
+		"inputs": [],
+		"stateMutability": "nonpayable",
+		"type": "constructor"
+	},
+	{
+		"inputs": [],
+		"name": "admin",
+		"outputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "count",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "deposit",
+		"outputs": [],
+		"stateMutability": "payable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "message_index",
+				"type": "uint256"
+			}
+		],
+		"name": "getMessage",
+		"outputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			},
+			{
+				"internalType": "string",
+				"name": "",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "",
+				"type": "string"
+			},
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"name": "messages",
+		"outputs": [
+			{
+				"internalType": "address",
+				"name": "sender",
+				"type": "address"
+			},
+			{
+				"internalType": "string",
+				"name": "name",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "email",
+				"type": "string"
+			},
+			{
+				"internalType": "uint256",
+				"name": "count_t",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_amount",
+				"type": "uint256"
+			},
+			{
+				"internalType": "string",
+				"name": "name",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "email",
+				"type": "string"
+			},
+			{
+				"internalType": "uint256",
+				"name": "count_t",
+				"type": "uint256"
+			}
+		],
+		"name": "process",
+		"outputs": [],
+		"stateMutability": "payable",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "recipient",
+		"outputs": [
+			{
+				"internalType": "address payable",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "tokenAddress1",
+		"outputs": [
+			{
+				"internalType": "contract myToken",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_amount",
+				"type": "uint256"
+			}
+		],
+		"name": "transferAmount",
+		"outputs": [],
+		"stateMutability": "payable",
+		"type": "function"
+	}
+]; 
+      var Address = '0x6ed81d07a7177399c76944d5083aca0e818ac795'; // Add Your Contract address here!!!
+
+        // Set the Contract
+        var contract = new web3.eth.Contract(ABI, Address);
+
+        async function displayData() {
+        try {
+            // Get the current user's account address (admin)
+            var admin = localStorage.getItem('account_full');
+
+            // gets the total number of messages
+            var messageCount = await contract.methods.count().call({ from: admin });
+
+            // Initialize HTML string for the table
+            var tableHTML = `
+            <div style="color:red">
+            <h3>Customer responses <i>(Available only to admins)</i></h3>
+            </div>
+            <table class="table table-dark">
+                    <tr>
+                        <th scope="col" >Name</th>
+                        <th scope="col" >Email</th>
+                        <th scope="col" >Count</th>
+                    </tr>
+            `;
+
+            // displays the data
+            for (var i = 0; i < messageCount; i++) {
+                var result = await contract.methods.getMessage(i).call({ from: admin });
+                tableHTML += `
+                    <tr>
+                        <th scope="row">${result[1]}</td>
+                        <td>${result[2]}</td>
+                        <td>${result[3]}</td>
+                    </tr>
+                `;
+            }
+            tableHTML += `</table>`;
+            document.getElementById("displayTable").innerHTML = tableHTML;
+        } catch (error) {
+            console.error("Error fetching message details:", error);
+        }
+    }
+    displayData();
+    </script>
 </body>
 
 </html>
