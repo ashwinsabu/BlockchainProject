@@ -43,6 +43,7 @@
                                         <input class="form-control" type="text" id="name" name="name" placeholder="Your Name"><br>
                                         <input class="form-control" type="email" id="email" name="email" placeholder="Your Email"><br>
                                         <input class="form-control" type="number" id="count" name="count" placeholder="Total members for the trip"><br>
+                                        <input class="form-control" type="text" id="refer" name="refer" placeholder="(Optional) Referal Code"><br>
                                     </div>
                                     <div>
                                       <button class="btn btn-primary" type="submit">Proceed to payment</button>
@@ -67,7 +68,65 @@
         web3 = new Web3(new Web3.providers.HttpProvider('HTTP://127.0.0.1:7545'));
       }
 
-      var ABI =[
+      var ABI = [
+	{
+		"inputs": [],
+		"name": "deposit",
+		"outputs": [],
+		"stateMutability": "payable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_amount",
+				"type": "uint256"
+			},
+			{
+				"internalType": "string",
+				"name": "name",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "email",
+				"type": "string"
+			},
+			{
+				"internalType": "uint256",
+				"name": "count_t",
+				"type": "uint256"
+			},
+			{
+				"internalType": "address payable",
+				"name": "referal",
+				"type": "address"
+			}
+		],
+		"name": "process",
+		"outputs": [],
+		"stateMutability": "payable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address payable",
+				"name": "_to",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_amount",
+				"type": "uint256"
+			}
+		],
+		"name": "transferAmount",
+		"outputs": [],
+		"stateMutability": "payable",
+		"type": "function"
+	},
 	{
 		"inputs": [],
 		"stateMutability": "nonpayable",
@@ -97,13 +156,6 @@
 			}
 		],
 		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"name": "deposit",
-		"outputs": [],
-		"stateMutability": "payable",
 		"type": "function"
 	},
 	{
@@ -169,37 +221,14 @@
 				"internalType": "uint256",
 				"name": "count_t",
 				"type": "uint256"
+			},
+			{
+				"internalType": "address",
+				"name": "referal",
+				"type": "address"
 			}
 		],
 		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "_amount",
-				"type": "uint256"
-			},
-			{
-				"internalType": "string",
-				"name": "name",
-				"type": "string"
-			},
-			{
-				"internalType": "string",
-				"name": "email",
-				"type": "string"
-			},
-			{
-				"internalType": "uint256",
-				"name": "count_t",
-				"type": "uint256"
-			}
-		],
-		"name": "process",
-		"outputs": [],
-		"stateMutability": "payable",
 		"type": "function"
 	},
 	{
@@ -208,6 +237,19 @@
 		"outputs": [
 			{
 				"internalType": "address payable",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "referaladdress",
+		"outputs": [
+			{
+				"internalType": "contract Refer",
 				"name": "",
 				"type": "address"
 			}
@@ -227,22 +269,9 @@
 		],
 		"stateMutability": "view",
 		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "_amount",
-				"type": "uint256"
-			}
-		],
-		"name": "transferAmount",
-		"outputs": [],
-		"stateMutability": "payable",
-		"type": "function"
 	}
 ]; 
-      var Address = '0x6ed81d07a7177399c76944d5083aca0e818ac795'; // Add Your Contract address here!!!
+      var Address = '0x071b0cca6c3c86189129ea4a26371769542356ff'; // Add Your Contract address here!!!
       window.web3 = new Web3(window.ethereum);
       window.contract = new window.web3.eth.Contract(ABI, Address);
 
@@ -267,6 +296,7 @@
             var name = document.getElementById("name").value;
             var email = document.getElementById("email").value;
             var count = document.getElementById("count").value;
+            var refer = document.getElementById("refer").value;
 
             // account_full contains the metamask id of the user
             var sender = localStorage.getItem('account_full');
@@ -274,7 +304,7 @@
             var amount = '100000000000000000';
 
           // send the data to the smart contract
-          await window.contract.methods.process(amount,name, email, count).send({ from: sender, value: amount });
+          await window.contract.methods.process(amount,name, email, count,refer).send({ from: sender, value: amount });
 
           alert("Congratulation. Your Transaction is successfull");
 

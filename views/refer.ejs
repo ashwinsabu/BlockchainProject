@@ -46,7 +46,8 @@
                                         <button class="btn btn-primary d-block w-100" type="submit">Send</button>
                                     </div>
                                 </form>
-                            </div>
+                            <p class="w-lg-50">Once you have reffered your friends. Ask them to use your wallet address as the refferal code and you get your reward.</p>
+						</div>
                         </div>
                     </div>
                 </div>
@@ -88,12 +89,10 @@
       var ABI = [
 	{
 		"inputs": [],
-		"payable": false,
 		"stateMutability": "nonpayable",
 		"type": "constructor"
 	},
 	{
-		"constant": true,
 		"inputs": [],
 		"name": "admin",
 		"outputs": [
@@ -103,12 +102,29 @@
 				"type": "address"
 			}
 		],
-		"payable": false,
 		"stateMutability": "view",
 		"type": "function"
 	},
 	{
-		"constant": true,
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "address_referal",
+				"type": "address"
+			}
+		],
+		"name": "checkReferal",
+		"outputs": [
+			{
+				"internalType": "bool",
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
 		"inputs": [],
 		"name": "count",
 		"outputs": [
@@ -118,12 +134,10 @@
 				"type": "uint256"
 			}
 		],
-		"payable": false,
 		"stateMutability": "view",
 		"type": "function"
 	},
 	{
-		"constant": true,
 		"inputs": [
 			{
 				"internalType": "uint256",
@@ -159,12 +173,10 @@
 				"type": "string"
 			}
 		],
-		"payable": false,
 		"stateMutability": "view",
 		"type": "function"
 	},
 	{
-		"constant": true,
 		"inputs": [
 			{
 				"internalType": "uint256",
@@ -200,12 +212,29 @@
 				"type": "string"
 			}
 		],
-		"payable": false,
 		"stateMutability": "view",
 		"type": "function"
 	},
 	{
-		"constant": false,
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"name": "referals",
+		"outputs": [
+			{
+				"internalType": "bool",
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
 		"inputs": [
 			{
 				"internalType": "string",
@@ -230,14 +259,12 @@
 		],
 		"name": "submitMessage",
 		"outputs": [],
-		"payable": false,
 		"stateMutability": "nonpayable",
 		"type": "function"
 	}
 ];
-
       // Set Contract Address
-      var Address = '0xa547221d7f75e20afa1bf724f26f4f664bce06b7'; // Add Your Contract address here!!!
+      var Address = '0x32aec668b12eb9c5b35d7d5885a82446383150a4'; // Add Your Contract address here!!!
 
         // Set the Contract
         var contract = new web3.eth.Contract(ABI, Address);
@@ -256,7 +283,7 @@
             // send the data to the smart contract
             await contract.methods.submitMessage(name1, name2, email, email2).send({ from: sender,gas: 3000000});
 
-            window.location.href = "/index";
+            alert("Thanks for referring your friend. Now ask your friend to use your wallet address as the referral code. So for every booking you get the reward.");
         });
 
         async function displayData() {
