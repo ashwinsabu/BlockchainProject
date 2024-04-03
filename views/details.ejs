@@ -23,6 +23,7 @@
                         <div class="col-md-8 col-xl-6 text-center mx-auto">
                             <h2><%= details.place %></h2>
                             <p class="w-lg-50"><%= details.description %></p>
+							<p id="cost">Total cost for the entire package would be equal to 500 USD (approx 0.15 Ether)</p>
                         </div>
                     </div>
                     <div class="row gy-4 row-cols-1 row-cols-md-2 row-cols-xl-3">
@@ -42,6 +43,7 @@
                                     <div class="mb-3">
                                         <input class="form-control" type="text" id="name" name="name" placeholder="Your Name"><br>
                                         <input class="form-control" type="email" id="email" name="email" placeholder="Your Email"><br>
+                                        <input class="form-control" type="date" id="date1" name="date1" placeholder="Select Date"><br>
                                         <input class="form-control" type="number" id="count" name="count" placeholder="Total members for the trip"><br>
                                         <input class="form-control" type="text" id="refer" name="refer" placeholder="(Optional) Referal Code"><br>
                                     </div>
@@ -102,6 +104,11 @@
 				"internalType": "address payable",
 				"name": "referal",
 				"type": "address"
+			},
+			{
+				"internalType": "string",
+				"name": "date",
+				"type": "string"
 			}
 		],
 		"name": "process",
@@ -187,6 +194,11 @@
 				"internalType": "uint256",
 				"name": "",
 				"type": "uint256"
+			},
+			{
+				"internalType": "string",
+				"name": "",
+				"type": "string"
 			}
 		],
 		"stateMutability": "view",
@@ -226,6 +238,11 @@
 				"internalType": "address",
 				"name": "referal",
 				"type": "address"
+			},
+			{
+				"internalType": "string",
+				"name": "date",
+				"type": "string"
 			}
 		],
 		"stateMutability": "view",
@@ -270,8 +287,8 @@
 		"stateMutability": "view",
 		"type": "function"
 	}
-]; 
-      var Address = '0x071b0cca6c3c86189129ea4a26371769542356ff'; // Add Your Contract address here!!!
+];
+	  var Address = '0xe5590a2ec8f447b350449db437a7cc285717cc5a'; // Add Your Contract address here!!!
       window.web3 = new Web3(window.ethereum);
       window.contract = new window.web3.eth.Contract(ABI, Address);
 
@@ -297,6 +314,7 @@
             var email = document.getElementById("email").value;
             var count = document.getElementById("count").value;
             var refer = document.getElementById("refer").value;
+            var date1 = document.getElementById("date1").value;
 
 			if (refer === ''){
 				refer='0x356841BF9df1F66AB275B7A3C345FC679F834B1a'
@@ -310,7 +328,7 @@
             var amount = rate_amount.toString();
 
           // send the data to the smart contract
-          await window.contract.methods.process(amount,name, email, count,refer).send({ from: sender, value: amount });
+          await window.contract.methods.process(amount,name, email, count,refer,date1).send({ from: sender, value: amount });
 
           alert("Congratulation. Your Transaction is successfull");
 

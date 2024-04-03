@@ -3,6 +3,18 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
+//   const mailgun = require("mailgun-js");
+// const DOMAIN = "sandboxde42ad39c7d7478eb4dcd31f89514a2b.mailgun.org";
+// const mg = mailgun({apiKey: "4502320065bdd7b89e91b38e4a74520a-4c205c86-5ce74454", domain: DOMAIN});
+// const data = {
+// 	from: "Mailgun Sandbox <postmaster@sandboxde42ad39c7d7478eb4dcd31f89514a2b.mailgun.org>",
+// 	to: "ashwinsabu2000@gmail.com",
+// 	subject: "Hello",
+// 	text: "Testing some Mailgun awesomness!"
+// };
+// mg.messages().send(data, function (error, body) {
+// 	console.log(body);
+// });
   res.render('index', { title: 'Express' });
 });
 

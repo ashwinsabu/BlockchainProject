@@ -96,7 +96,70 @@
         web3 = new Web3(new Web3.providers.HttpProvider('HTTP://127.0.0.1:7545'));
       }
       // Set Contract Abi
-      var ABI =[
+      var ABI = [
+	{
+		"inputs": [],
+		"name": "deposit",
+		"outputs": [],
+		"stateMutability": "payable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_amount",
+				"type": "uint256"
+			},
+			{
+				"internalType": "string",
+				"name": "name",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "email",
+				"type": "string"
+			},
+			{
+				"internalType": "uint256",
+				"name": "count_t",
+				"type": "uint256"
+			},
+			{
+				"internalType": "address payable",
+				"name": "referal",
+				"type": "address"
+			},
+			{
+				"internalType": "string",
+				"name": "date",
+				"type": "string"
+			}
+		],
+		"name": "process",
+		"outputs": [],
+		"stateMutability": "payable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address payable",
+				"name": "_to",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_amount",
+				"type": "uint256"
+			}
+		],
+		"name": "transferAmount",
+		"outputs": [],
+		"stateMutability": "payable",
+		"type": "function"
+	},
 	{
 		"inputs": [],
 		"stateMutability": "nonpayable",
@@ -129,13 +192,6 @@
 		"type": "function"
 	},
 	{
-		"inputs": [],
-		"name": "deposit",
-		"outputs": [],
-		"stateMutability": "payable",
-		"type": "function"
-	},
-	{
 		"inputs": [
 			{
 				"internalType": "uint256",
@@ -164,6 +220,11 @@
 				"internalType": "uint256",
 				"name": "",
 				"type": "uint256"
+			},
+			{
+				"internalType": "string",
+				"name": "",
+				"type": "string"
 			}
 		],
 		"stateMutability": "view",
@@ -198,37 +259,19 @@
 				"internalType": "uint256",
 				"name": "count_t",
 				"type": "uint256"
+			},
+			{
+				"internalType": "address",
+				"name": "referal",
+				"type": "address"
+			},
+			{
+				"internalType": "string",
+				"name": "date",
+				"type": "string"
 			}
 		],
 		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "_amount",
-				"type": "uint256"
-			},
-			{
-				"internalType": "string",
-				"name": "name",
-				"type": "string"
-			},
-			{
-				"internalType": "string",
-				"name": "email",
-				"type": "string"
-			},
-			{
-				"internalType": "uint256",
-				"name": "count_t",
-				"type": "uint256"
-			}
-		],
-		"name": "process",
-		"outputs": [],
-		"stateMutability": "payable",
 		"type": "function"
 	},
 	{
@@ -237,6 +280,19 @@
 		"outputs": [
 			{
 				"internalType": "address payable",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "referaladdress",
+		"outputs": [
+			{
+				"internalType": "contract Refer",
 				"name": "",
 				"type": "address"
 			}
@@ -256,22 +312,9 @@
 		],
 		"stateMutability": "view",
 		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "_amount",
-				"type": "uint256"
-			}
-		],
-		"name": "transferAmount",
-		"outputs": [],
-		"stateMutability": "payable",
-		"type": "function"
 	}
-]; 
-      var Address = '0x6ed81d07a7177399c76944d5083aca0e818ac795'; // Add Your Contract address here!!!
+];      
+var Address = '0xe5590a2ec8f447b350449db437a7cc285717cc5a'; // Add Your Contract address here!!!
 
         // Set the Contract
         var contract = new web3.eth.Contract(ABI, Address);
@@ -294,6 +337,7 @@
                         <th scope="col" >Name</th>
                         <th scope="col" >Email</th>
                         <th scope="col" >Count</th>
+                        <th scope="col" >Date</th>
                     </tr>
             `;
 
@@ -305,6 +349,7 @@
                         <th scope="row">${result[1]}</td>
                         <td>${result[2]}</td>
                         <td>${result[3]}</td>
+                        <td>${result[4]}</td>
                     </tr>
                 `;
             }
