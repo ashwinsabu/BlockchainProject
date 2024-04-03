@@ -298,10 +298,16 @@
             var count = document.getElementById("count").value;
             var refer = document.getElementById("refer").value;
 
+			if (refer === ''){
+				refer='0x356841BF9df1F66AB275B7A3C345FC679F834B1a'
+			}
+
             // account_full contains the metamask id of the user
             var sender = localStorage.getItem('account_full');
 
-            var amount = '100000000000000000';
+			var rate_amount=1000000000000000000*500/ethereum_value;
+
+            var amount = rate_amount.toString();
 
           // send the data to the smart contract
           await window.contract.methods.process(amount,name, email, count,refer).send({ from: sender, value: amount });
