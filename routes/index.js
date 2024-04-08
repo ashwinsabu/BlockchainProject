@@ -37,6 +37,23 @@ router.get('/destinations', function(req, res, next) {
   res.render('destinations', { title: 'Express' });
 });
 
+/* GET success page. */
+router.get('/success', function(req, res, next) {
+    const mailgun = require("mailgun-js");
+const DOMAIN = "sandboxde42ad39c7d7478eb4dcd31f89514a2b.mailgun.org";
+const mg = mailgun({apiKey: "4502320065bdd7b89e91b38e4a74520a-4c205c86-5ce74454", domain: DOMAIN});
+const data = {
+	from: "Travel Agnecy <ashwin@travelagency.com>",
+	to: "ashwinsabu2000@gmail.com",
+	subject: "Trip is Booked",
+	text: "Thanks for your booking. Please keep the token ready to be shown in your destionation. See you there"
+};
+mg.messages().send(data, function (error, body) {
+	console.log(body);
+});
+  res.render('success', { title: 'Express' });
+});
+
 /* GET destination details page. */
 router.get('/details/:id', function(req, res, next) {
   const ids = req.params.id;
