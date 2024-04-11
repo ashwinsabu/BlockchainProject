@@ -302,9 +302,9 @@ map.on('click', onMapClick);
             var sender = localStorage.getItem('account_full');
 
             // send the data to the smart contract
-            await contract.methods.submitMessage(name, email, destination, days, message).send({ from: sender,gas: 3000000});
+            await contract.methods.submitMessage(name, email, destination, days, message).send({ from: sender, gas: 3000000});
 
-            window.location.href = "/about";
+            alert("Thanks for contacting us, we would be more than happy to come back !!!");
         });
 
         async function displayData() {
